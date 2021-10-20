@@ -11,6 +11,8 @@ import { LoginContext } from './components/LoginContext'
 import Posts from './components/Posts';
 import PostDetails from './components/PostDetails';
 import Header from './components/Header';
+
+import Footer from './components/Footer';
 function App() {
   const [user, setUser] = useState(null)
   return (
@@ -18,13 +20,14 @@ function App() {
     <>
       <LoginContext.Provider value={{ user, setUser }} >
         <Router>
-        <Header />
+          <Header />
           <Switch>
             <Route path="/post" component={Posts} />
             <Route path="/posts/:id" component={PostDetails} />
             <Route path="/" component={SignIn} />
 
           </Switch>
+          <Footer />
 
         </Router>
 

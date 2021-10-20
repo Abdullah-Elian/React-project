@@ -1,13 +1,10 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useEffect, useState } from 'react';
 
@@ -22,8 +19,6 @@ import {
 export default function PostDetails() {
     const [post, setpost] = useState({})
     const [comments, setComments] = useState([])
-
-    const theme = createTheme();
 
     const { id } = useParams()
 
@@ -68,8 +63,8 @@ export default function PostDetails() {
                     </Grid>
 
                     {comments.map((item) => (
-                        <Grid item xs={4} >
-                            <Comment key={item.id} comments={item} />
+                        <Grid key={item.id} item xs={12} sm={4} >
+                            <Comment  comments={item} />
                         </Grid>
                     ))}
                 </Grid>
