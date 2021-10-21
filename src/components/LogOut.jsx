@@ -15,11 +15,7 @@ export default function LogOut() {
     const history = useHistory() 
 
     const handleSubmit = () => {
-            console.log(user);
             setUser(null)
-
-            console.log(user);
-
             history.push("/")
      
     };

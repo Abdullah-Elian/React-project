@@ -1,4 +1,9 @@
 import * as React from 'react';
+
+import {
+    useHistory,
+} from "react-router-dom";
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,12 +12,9 @@ import Button from '@mui/material/Button';
 import { Avatar } from '@mui/material';
 import { useContext } from 'react';
 
-import { LoginContext } from './LoginContext'
-import LogOut from './LogOut';
+import { LoginContext } from '../LoginContext';
+import LogOut from '../LogOut';
 
-import {
-    useHistory,
-} from "react-router-dom";
 
 export default function Header() {
     const { user } = useContext(LoginContext)
@@ -24,7 +26,7 @@ export default function Header() {
     }
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" data-testid="header">
                 <Toolbar>
                    
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

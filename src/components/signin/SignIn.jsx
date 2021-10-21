@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { useContext, useEffect, useState} from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import {
+    useHistory,
+
+} from "react-router-dom";
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -15,43 +20,54 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { LoginContext } from './LoginContext'
+import { LoginContext } from '../LoginContext'
 import axios from 'axios';
-import {
-    useHistory,
-    
-  } from "react-router-dom";
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+
 
 const theme = createTheme();
 
 export default function SignIn() {
     const { setUser } = useContext(LoginContext)
-    const [users ,setUsers] = useState([])
-    const history = useHistory() 
+    const [users, setUsers] = useState([])
+    const history = useHistory()
 
-    useEffect(async () => {
+
+    // seEffect(() => {
+    //     const fetchData = async () => {
+    //        const data = await getData(1);
+    //        setData(data);
+    //     }
+
+    //     fetchData();
+    //   }, []);
+
+
+
+    async function getUserData() {
         const url = "https://jsonplaceholder.typicode.com/users"
         try {
             const response = await axios.get(url);
-            
-            setUsers(response.data);
+
+            return response.data;
 
         } catch (error) {
             console.log(error);
         }
+    }
+
+    useEffect( () => {
+        // let isMounted=true
+       
+        const fetchData = async () => {
+            const data = await getUserData();
+                setUsers(data);
+                
+            }
+            
+            
+            fetchData()
+            
 
 
 
@@ -59,16 +75,16 @@ export default function SignIn() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const userData = {
-            email: data.get('email'),
-            password: data.get('password'),
-        }
+        // const userData = {
+        //     email: data.get('email'),
+        //     password: data.get('password'),
+        // }
 
         const found = users.find(element => element.email === data.get('email'));
         if (found) {
             setUser(found)
             history.push("/post")
-        }else{
+        } else {
             alert("incorrect email")
         }
 
@@ -142,7 +158,6 @@ export default function SignIn() {
                         </Grid>
                     </Box>
                 </Box>
-                {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
             </Container>
         </ThemeProvider>
     );
