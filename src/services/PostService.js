@@ -10,7 +10,9 @@ export const getPost =async ()=>{
         return response.data;
 
     } catch (error) {
-        console.log(error);
+        console.log("abdullah from servesce error 1");
+
+        return false
     }
 
 }
@@ -25,7 +27,7 @@ export const getSinglePost =async (info)=>{
         return response.data;
 
     } catch (error) {
-        console.log(error);
+        return false
     }
 
 }
@@ -39,7 +41,8 @@ export const getPostComment =async (info)=>{
         return response.data;
 
     } catch (error) {
-        console.log(error);
+
+        return false
     }
 
 }

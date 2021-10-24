@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -12,16 +13,19 @@ export default function Comment({ comments }) {
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                        <Avatar> {comments.email.charAt(0)}</Avatar>
+                        <Avatar data-testid="img"> {comments.email.charAt(0)}</Avatar>
                     </ListItemAvatar>
                     <ListItemText
+                        
                         primary={comments.name}
+                        data-testid="body"
                         secondary={
-                            <React.Fragment>
+                            <React.Fragment >
                                 <Typography
                                     sx={{ display: 'inline' }}
                                     component="span"
                                     variant="body2"
+                                    data-testid="email"
                                     color="text.primary"
                                 >
                                     {comments.email} :

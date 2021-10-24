@@ -6,7 +6,7 @@ import {
     
   } from "react-router-dom";
 
-import { LoginContext } from './LoginContext'
+import { LoginContext } from '../LoginContext'
 
 import Button from '@mui/material/Button';
 
@@ -15,11 +15,7 @@ export default function LogOut() {
     const history = useHistory() 
 
     const handleSubmit = () => {
-            console.log(user);
             setUser(null)
-
-            console.log(user);
-
             history.push("/")
      
     };
