@@ -6,7 +6,7 @@ import {
     
   } from "react-router-dom";
 
-import { LoginContext } from './LoginContext'
+import { LoginContext } from '../LoginContext'
 
 import Button from '@mui/material/Button';
 

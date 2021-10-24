@@ -110,7 +110,7 @@ Object {
 }
 `;
 
-exports[`Posts should render Posts component  1`] = `
+exports[`Posts should go to the single post page 1`] = `
 Object {
   "debug": [Function],
   "findAllByAltText": [Function],

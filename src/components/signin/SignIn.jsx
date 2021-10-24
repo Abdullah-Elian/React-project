@@ -61,6 +61,7 @@ export default function SignIn() {
        
         const fetchData = async () => {
             const data = await getUserData();
+            console.log(data);
                 setUsers(data);
                 
             }
@@ -85,6 +86,7 @@ export default function SignIn() {
             setUser(found)
             history.push("/post")
         } else {
+            console.log("abdullah from error");
             alert("incorrect email")
         }
 

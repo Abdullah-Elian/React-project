@@ -68,9 +68,29 @@ render(
 await waitFor(() => {
 const buttonElement = screen.getByText("View");
 fireEvent.click(buttonElement)
+expect(screen).toMatchSnapshot();
+
 
 });
 
 });
+
+
+it('should throw error if the api does not respond',  () => {
+
+  const history = createMemoryHistory()
+  const pushSpy = jest.spyOn(history, 'push')
+  
+  render(
+  <LoginContext.Provider value={{ user: { id: 1, email: "a@a.com" } }}>
+  <Router history={history}>
+  <Posts />
+  </Router>
+  );
+  </LoginContext.Provider>
+  );
+   
+  
+  });
 
 })

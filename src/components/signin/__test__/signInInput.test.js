@@ -11,148 +11,167 @@ import SignIn from '../SignIn';
 
 describe("SignInInput", () => {
 
-it('should render Posts component ', async () => {
-axiosMock.get.mockResolvedValueOnce({
-data: [{
+    it('should render Posts component ', async () => {
+        axiosMock.get.mockResolvedValueOnce({
+            data: [{
 
-"id": 1,
-"name": "Leanne Graham",
-"username": "Bret",
-"email": "Sincere@april.biz",
+                "id": 1,
+                "name": "Leanne Graham",
+                "username": "Bret",
+                "email": "Sincere@april.biz",
 
-}]
-});
+            }]
+        });
 
-render(<SignIn />);
+        render(<SignIn />);
 
-await waitFor(() => {
+        await waitFor(() => {
 
-expect(screen).toMatchSnapshot();
-});
+            expect(screen).toMatchSnapshot();
+        });
 
-});
+    });
 
-it('should render email input element',async () => {
-axiosMock.get.mockResolvedValueOnce({
-data: [{
+    it('should render email input element', async () => {
+        axiosMock.get.mockResolvedValueOnce({
+            data: [{
 
-"id": 1,
-"name": "Leanne Graham",
-"username": "Bret",
-"email": "Sincere@april.biz",
+                "id": 1,
+                "name": "Leanne Graham",
+                "username": "Bret",
+                "email": "Sincere@april.biz",
 
-}]
-});
-render(<SignIn />);
+            }]
+        });
+        render(<SignIn />);
 
-await waitFor(() => {
+        await waitFor(() => {
 
-const inputElement = screen.getByLabelText(/Email Address/i);
-expect(inputElement).toBeInTheDocument();
-});
-});
+            const inputElement = screen.getByLabelText(/Email Address/i);
+            expect(inputElement).toBeInTheDocument();
+        });
+    });
 
-it('should be able to type into input', async () => {
-axiosMock.get.mockResolvedValueOnce({
-data: [{
+    it('should be able to type into input', async () => {
+        axiosMock.get.mockResolvedValueOnce({
+            data: [{
 
-"id": 1,
-"name": "Leanne Graham",
-"username": "Bret",
-"email": "Sincere@april.biz",
+                "id": 1,
+                "name": "Leanne Graham",
+                "username": "Bret",
+                "email": "Sincere@april.biz",
 
-}]
-});
-render(
-<SignIn />
-);
+            }]
+        });
+        render(
+            <SignIn />
+        );
 
-await waitFor(() => {
+        await waitFor(() => {
 
-const inputElement = screen.getByLabelText(/Email Address/i);
-fireEvent.change(inputElement, { target: { value: "a@a.com" } })
-expect(inputElement.value).toBe("a@a.com");
+            const inputElement = screen.getByLabelText(/Email Address/i);
+            fireEvent.change(inputElement, { target: { value: "a@a.com" } })
+            expect(inputElement.value).toBe("a@a.com");
 
-});
+        });
 
-});
-
-
+    });
 
 
-it('should not be able to sign in if the email was wrong', async () => {
 
-axiosMock.get.mockResolvedValueOnce({
-data: [{
 
-"id": 1,
-"name": "Leanne Graham",
-"username": "Bret",
-"email": "Sincere@april.biz",
+    it('should not be able to sign in if the email was wrong', async () => {
 
-}]
-});
-render(
-<SignIn />
-);
+        const alertMock = jest.spyOn(window,'alert').mockImplementation(); 
 
-await waitFor(() => {
+        axiosMock.get.mockResolvedValueOnce({
+            data: [{
 
-const buttonElement = screen.getByTestId(/loginButton/i);
-fireEvent.click(buttonElement, { target: { value: "a@aa.com" } })
-expect(buttonElement).toBeInTheDocument();
+                "id": 1,
+                "name": "Leanne Graham",
+                "username": "Bret",
+                "email": "Sincere@april.biz",
 
-});
+            }]
+        });
+        render(
+            <SignIn />
+        );
 
-});
+        await waitFor(() => {
 
-it('should be able to sign in if the email was correct ', async () => {
-axiosMock.get.mockResolvedValueOnce({
-data: [{
+            const buttonElement = screen.getByTestId(/loginButton/i);
+            fireEvent.click(buttonElement, { target: { value: "a@aa.com" } })
+            expect(alertMock).toHaveBeenCalledTimes(1)
+            // expect(buttonElement).toBeInTheDocument();
 
-"id": 1,
-"name": "Leanne Graham",
-"username": "Bret",
-"email": "a@a.com",
+        });
 
-}]
-});
+    });
 
-// const history = createMemoryHistory()
-// const pushSpy = jest.spyOn(history, 'push')
+    it('should not be able to sign in if the email was wrong', async () => {
 
-// const myInitialState = 'My Initial State'
-// const mockHistoryPush = jest.fn();
+        render(
+            <SignIn />
+        );
 
-// jest.mock('react-router-dom', () => ({
-// ...jest.requireActual('react-router-dom'),
-// useHistory: () => ({
-// push: mockHistoryPush,
-// }),
-// }));
+        await waitFor(() => {
 
-const setUser = jest.fn()
+            const buttonElement = screen.getByTestId(/loginButton/i);
+            fireEvent.click(buttonElement, { target: { value: "a@aa.com" } })
+            // expect(buttonElement).toBeInTheDocument();
 
-render(
-<LoginContext.Provider value={{ user: { id: 1, email: "a@a.com" }, setUser }}>
-<MemoryRouter>
-<SignIn />
-</MemoryRouter>,
-);
-</LoginContext.Provider>
-);
+        });
 
-await waitFor(() => {
-const inputElement = screen.getByLabelText(/Email Address/i);
-fireEvent.change(inputElement, { target: { value: "a@a.com" } })
-expect(inputElement.value).toBe("a@a.com")
+    });
 
-});
-const buttonElement = screen.getByTestId(/loginButton/i);
-fireEvent.click(buttonElement)
-expect(buttonElement).toBeInTheDocument();
+    it('should be able to sign in if the email was correct ', async () => {
+        axiosMock.get.mockResolvedValueOnce({
+            data: [{
 
-});
+                "id": 1,
+                "name": "Leanne Graham",
+                "username": "Bret",
+                "email": "a@a.com",
+
+            }]
+        });
+
+        // const history = createMemoryHistory()
+        // const pushSpy = jest.spyOn(history, 'push')
+
+        // const myInitialState = 'My Initial State'
+        // const mockHistoryPush = jest.fn();
+
+        // jest.mock('react-router-dom', () => ({
+        // ...jest.requireActual('react-router-dom'),
+        // useHistory: () => ({
+        // push: mockHistoryPush,
+        // }),
+        // }));
+
+        const setUser = jest.fn()
+
+        render(
+            <LoginContext.Provider value={{ user: { id: 1, email: "a@a.com" }, setUser }}>
+                <MemoryRouter>
+                    <SignIn />
+                </MemoryRouter>,
+                );
+            </LoginContext.Provider>
+        );
+
+        await waitFor(() => {
+            const inputElement = screen.getByLabelText(/Email Address/i);
+            fireEvent.change(inputElement, { target: { value: "a@a.com" } })
+            expect(inputElement.value).toBe("a@a.com")
+
+        });
+        const buttonElement = screen.getByTestId(/loginButton/i);
+        fireEvent.click(buttonElement)
+        expect(buttonElement).toBeInTheDocument();
+
+    });
 
 
 })

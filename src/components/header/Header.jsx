@@ -13,7 +13,7 @@ import { Avatar } from '@mui/material';
 import { useContext } from 'react';
 
 import { LoginContext } from '../LoginContext';
-import LogOut from '../LogOut';
+import LogOut from '../logout/LogOut'
 
 
 export default function Header() {

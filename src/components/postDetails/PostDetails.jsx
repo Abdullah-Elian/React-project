@@ -30,6 +30,7 @@ export default function PostDetails() {
         const fetchData = async () => {
             const postComment = await getPostComment(id)
             const singlePostData = await getSinglePost(id)
+            console.log(singlePostData);
             setpost(singlePostData)
             setComments(postComment)
         }
@@ -69,7 +70,7 @@ export default function PostDetails() {
                         </Card>
                     </Grid>
 
-                    {comments.map((item) => (
+                    {comments && comments.map((item) => (
                         <Grid key={item.id} item xs={12} sm={4} >
                             <Comment  comments={item} />
                         </Grid>
